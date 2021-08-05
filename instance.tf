@@ -35,7 +35,7 @@ data "vsphere_virtual_machine" "template" {
 
 resource "vsphere_folder" "vm_folder" {
 #   path          =  "${var.vm_folder}-${random_string.folder_name_prefix.id}"
-  path          =  "${var.vm_folder}
+  path          =  "${var.vm_folder}"
   type          = "vm"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
