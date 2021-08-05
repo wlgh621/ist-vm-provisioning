@@ -24,18 +24,17 @@ data "vsphere_virtual_machine" "template" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-# resource "random_string" "folder_name_prefix" {
-#   length    = 10
-#   min_lower = 10
-#   special   = false
-#   lower     = true
+resource "random_string" "folder_name_prefix" {
+  length    = 10
+  min_lower = 10
+  special   = false
+  lower     = true
 
-# }
+}
 
 
 resource "vsphere_folder" "vm_folder" {
-#   path          =  "${var.vm_folder}-${random_string.folder_name_prefix.id}"
-  path          =  "${var.vm_folder}"
+  path          =  "${var.vm_folder}-${random_string.folder_name_prefix.id}"
   type          = "vm"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
@@ -43,8 +42,7 @@ resource "vsphere_folder" "vm_folder" {
 #Lets see something cool with Cisco Intersight & TFCB
 resource "vsphere_virtual_machine" "vm_deploy" {
   count            = var.vm_count
- # name             = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
-  name             = "${var.vm_prefix}-${count.index + 1}"
+  name             = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
 
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
@@ -72,8 +70,7 @@ resource "vsphere_virtual_machine" "vm_deploy" {
     template_uuid = data.vsphere_virtual_machine.template.id
     customize {
       linux_options {
-        #host_name = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
-        host_name = "${var.vm_prefix}-${count.index + 1}"
+        host_name = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
         domain    = var.vm_domain
       }
       network_interface {}
