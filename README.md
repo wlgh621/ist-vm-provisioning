@@ -63,7 +63,7 @@ Create a template for a linux VM. This could be either CentOS or Ubuntu. Make su
 | resource_pool | IntersightPool ||
 | datastore_name | nfs-datastore-0 ||
 | network_name | vlan1238 ||
-| template_name | MO-CENTOS7"
+| template_name | MO-CENTOS7 ||
 | vm_prefix | momagic ||
 | vm_folder | momagic ||
 | vm_count | 2 ||
