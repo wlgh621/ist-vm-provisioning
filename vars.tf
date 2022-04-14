@@ -70,5 +70,5 @@ variable "vm_count" {
 variable "vm_domain" {
   type = string
   description = "Domain Name for the virtual machine"
-  default = "cisg-arch-test"
+  default = "cisg-arch-day"
 }
