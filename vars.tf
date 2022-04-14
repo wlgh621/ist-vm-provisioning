@@ -38,7 +38,7 @@ variable "network_name" {
 variable "template_name" {
   type = string
   description = "Name of the template"
-  default = "Test-Centos7"
+  default = "ubuntu20.04"
 }
 // The virtual machine cpu
 variable "vm_cpu" {
