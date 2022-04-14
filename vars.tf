@@ -2,7 +2,7 @@
 variable "vsphere_server" {
   type = string
   description = "Hostname or IP address of your vCenter server" 
-  default = "10.70.136.15"
+  default = "10.70.137.15"
 }
 
 variable "vsphere_user" {
@@ -20,14 +20,14 @@ variable "vsphere_password" {
 variable "datacenter" {
   type = string
   description = "The datacenter the resources will be created in"
-  default = "DC1"
+  default = "DC2"
 }
 
 
 variable "resource_pool" {
   type = string
   description = "Name of the resource pool"
-  default = "IST-Demo"
+  default = "cisg-arch-day"
 }
 
 variable "datastore_name" {
@@ -40,14 +40,14 @@ variable "datastore_name" {
 variable "network_name" {
   type = string
   description = "Name of the network"
-  default = "MGMT-Net_136.x"
+  default = "MGMT-Net_137.x"
 }
 
 // The name of the template to use when cloning.
 variable "template_name" {
   type = string
   description = "Name of the template"
-  default = "136.160Ubunutu2004"
+  default = "Test-Centos7"
 }
 
 
@@ -55,7 +55,7 @@ variable "template_name" {
 variable "vm_cpu" {
   type = number
   description = "Number of vCPUs"
-  default = 2
+  default = 1
 }
 
 variable "vm_memory" {
@@ -73,7 +73,7 @@ variable "vm_prefix" {
 variable "vm_folder" {
   type = string
   description = "Name of folder"
-  default = "IST-Demo"
+  default = "cisg-arch-day"
 }
 
 variable "vm_count" {
@@ -85,5 +85,5 @@ variable "vm_count" {
 variable "vm_domain" {
   type = string
   description = "Domain Name for the virtual machine"
-  default = "IST-Demo"
+  default = "cisg-arch-day"
 }
