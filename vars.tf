@@ -44,7 +44,7 @@ variable "template_name" {
 variable "vm_cpu" {
   type = number
   description = "Number of vCPUs"
-  default = 1
+  default = 2
 }
 variable "vm_memory" {
   type = number
