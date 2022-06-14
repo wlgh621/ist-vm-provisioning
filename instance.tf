@@ -73,7 +73,13 @@ resource "vsphere_virtual_machine" "vm_deploy" {
         host_name = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
         domain    = var.vm_domain
       }
-      network_interface {}
+      network_interface {
+        ipv4_address = lookup(var.master_ips, count.index)
+        ipv4_netmask = var.guest_ipv4_netmask
+      }
+      ipv4_gateway    = var.guest_ipv4_gateway
+      dns_server_list = [var.guest_dns_servers]
+      
     }
   }
 
