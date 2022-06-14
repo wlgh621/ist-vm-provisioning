@@ -59,11 +59,6 @@ variable "vm_domain" {
   description = "Domain Name for the virtual machine"
 }
 
-variable "master_ips" {
-  type        = map(any)
-  description = "List of IPs used for Linux VMs."
-}
-
 variable "ipv4_netmask" {
   type = string
   description = "The IPv4 subnet mask, in bits (example: 24 for 255.255.255.0)."
