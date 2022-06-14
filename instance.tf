@@ -78,7 +78,7 @@ resource "vsphere_virtual_machine" "vm_deploy" {
         ipv4_netmask = var.ipv4_netmask
       }
       ipv4_gateway    = var.ipv4_gateway
-      dns_server_list = [var.dns_servers]
+      dns_server_list = [var.dns_server_list]
       
     }
   }
