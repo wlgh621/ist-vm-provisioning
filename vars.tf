@@ -75,6 +75,6 @@ variable "ipv4_gateway" {
 }
 
 variable "dns_server_list" {
-  type        = map(any)
+  type = string
   description = "The list of DNS servers to configure on the virtual machine."
 }
