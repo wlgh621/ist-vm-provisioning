@@ -75,10 +75,10 @@ resource "vsphere_virtual_machine" "vm_deploy" {
       }
       network_interface {
         ipv4_address = lookup(var.master_ips, count.index)
-        ipv4_netmask = var.guest_ipv4_netmask
+        ipv4_netmask = var.ipv4_netmask
       }
-      ipv4_gateway    = var.guest_ipv4_gateway
-      dns_server_list = [var.guest_dns_servers]
+      ipv4_gateway    = var.ipv4_gateway
+      dns_server_list = [var.dns_servers]
       
     }
   }
