@@ -74,7 +74,7 @@ variable "ipv4_gateway" {
   description = "The IPv4 default gateway."
 }
 
-variable "dns_servers" {
+variable "dns_server_list" {
   type        = map(any)
   description = "The list of DNS servers to configure on the virtual machine."
 }
