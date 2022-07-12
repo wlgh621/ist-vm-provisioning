@@ -1,4 +1,6 @@
-
+locals {
+  vm = csvdecode(file("./csv/topgun-vm-csv.csv"))
+}
 
 data "vsphere_datacenter" "dc" {
   name = var.datacenter
@@ -25,8 +27,8 @@ data "vsphere_virtual_machine" "template" {
 }
 
 resource "random_string" "folder_name_prefix" {
-  length    = 10
-  min_lower = 10
+  length    = 5
+  min_lower = 5
   special   = false
   lower     = true
 
@@ -66,6 +68,8 @@ resource "vsphere_virtual_machine" "vm_deploy" {
     thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   }
 
+  for_each = { for vm in local.vm : vm.IP => vm }
+  
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
     customize {
@@ -74,7 +78,8 @@ resource "vsphere_virtual_machine" "vm_deploy" {
         domain    = var.vm_domain
       }
       network_interface {
-        ipv4_address = lookup(var.master_ips, count.index)
+        ipv4_address = each.value.IP
+        #ipv4_address = lookup(var.master_ips, count.index)
         ipv4_netmask = var.ipv4_netmask
       }
       ipv4_gateway    = var.ipv4_gateway
