@@ -1,0 +1,4 @@
+﻿IP,Netmask,Gateway,network_name,vm_prefix,OS,vm_cpu,vm_memory
+100.0.0.1,24,10.70.136.1,MGMT-Net_136.x,TOPGUN-csv1,centos7min,2,2048
+100.0.0.2,24,10.70.136.1,MGMT-Net_136.x,TOPGUN-csv2,centos7min,2,2048
+100.0.0.3,24,10.70.136.1,MGMT-Net_136.x,TOPGUN-csv3,centos7min,2,2048
