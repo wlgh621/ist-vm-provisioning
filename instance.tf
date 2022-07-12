@@ -43,15 +43,18 @@ resource "vsphere_folder" "vm_folder" {
 
 #Lets see something cool with Cisco Intersight & TFCB
 resource "vsphere_virtual_machine" "vm_deploy" {
-  count            = var.vm_count
-  name             = "${local.vm[count.index].vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
+  for_each = { for inst in local.vm : inst.vm_memory => inst }
+  name = each.value.vm_prefix
+  #name             = "${local.vm[count.index].vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
 
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
   folder           = vsphere_folder.vm_folder.path
 
-  num_cpus = var.vm_cpu
-  memory   = var.vm_memory
+  num_cpus = each.value.vm_cpu
+  #num_cpus = var.vm_cpu
+  memory   = each.value.vm_memory
+  #memory   = var.vm_memory
   guest_id = data.vsphere_virtual_machine.template.guest_id
 
   scsi_type = data.vsphere_virtual_machine.template.scsi_type
@@ -76,7 +79,8 @@ resource "vsphere_virtual_machine" "vm_deploy" {
         domain    = var.vm_domain
       }
       network_interface {
-        ipv4_address = local.vm[count.index].IP
+        ipv4_address = each.value.ip
+        #ipv4_address = local.vm[count.index].IP
         #ipv4_address = lookup(var.master_ips, count.index)
         ipv4_netmask = var.ipv4_netmask
       }
