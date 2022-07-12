@@ -44,7 +44,7 @@ resource "vsphere_folder" "vm_folder" {
 #Lets see something cool with Cisco Intersight & TFCB
 resource "vsphere_virtual_machine" "vm_deploy" {
   count            = var.vm_count
-  name             = "${each.value.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
+  name             = "${local.vm[count.index].vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
 
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
@@ -76,7 +76,7 @@ resource "vsphere_virtual_machine" "vm_deploy" {
         domain    = var.vm_domain
       }
       network_interface {
-        ipv4_address = each.value.IP
+        ipv4_address = "$local.vm[count.index].IP"
         #ipv4_address = lookup(var.master_ips, count.index)
         ipv4_netmask = var.ipv4_netmask
       }
