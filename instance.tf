@@ -76,7 +76,7 @@ resource "vsphere_virtual_machine" "vm_deploy" {
         domain    = var.vm_domain
       }
       network_interface {
-        ipv4_address = "$local.vm[count.index].IP"
+        ipv4_address = local.vm[count.index].IP
         #ipv4_address = lookup(var.master_ips, count.index)
         ipv4_netmask = var.ipv4_netmask
       }
