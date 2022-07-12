@@ -44,7 +44,7 @@ resource "vsphere_folder" "vm_folder" {
 #Lets see something cool with Cisco Intersight & TFCB
 resource "vsphere_virtual_machine" "vm_deploy" {
   count            = var.vm_count
-  name             = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
+  name             = "${each.value.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
 
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
@@ -67,8 +67,6 @@ resource "vsphere_virtual_machine" "vm_deploy" {
     eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
     thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   }
-
-  for_each = { for vm in local.vm : vm.IP => vm }
   
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
