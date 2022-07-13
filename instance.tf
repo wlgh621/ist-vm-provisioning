@@ -12,28 +12,28 @@ data "vsphere_datastore" "datastore" {
   count = length(local.vm)
   name = local.vm[count.index].datastore_name
   #name          = var.datastore_name
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.dc[count.index].id
 }
 
 data "vsphere_resource_pool" "pool" {
   count = length(local.vm)
   name = local.vm[count.index].resource_pool
   #name          = var.resource_pool
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.dc[count.index].id
 }
 
 data "vsphere_network" "network" {
   count = length(local.vm)
   name = local.vm[count.index].network_name
   #name          = var.network_name
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.dc[count.index].id
 }
 
 data "vsphere_virtual_machine" "template" {
   count = length(local.vm)
   name = local.vm[count.index].template_name
   #name          = var.template_name
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.dc[count.index].id
 }
 
 resource "random_string" "folder_name_prefix" {
@@ -46,9 +46,10 @@ resource "random_string" "folder_name_prefix" {
 
 
 resource "vsphere_folder" "vm_folder" {
-  path          =  "${var.vm_folder}-${random_string.folder_name_prefix.id}"
+   count = length(local.vm)
+  path          =  "${local.vm[count.index].vm_folder}-${random_string.folder_name_prefix.id}"
   type          = "vm"
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.dc[count.index].id
 }
 
 #Lets see something cool with Cisco Intersight & TFCB
