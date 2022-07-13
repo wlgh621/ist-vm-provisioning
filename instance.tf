@@ -53,7 +53,7 @@ resource "vsphere_folder" "vm_folder" {
 
 #Lets see something cool with Cisco Intersight & TFCB
 resource "vsphere_virtual_machine" "vm_deploy" {
-  for_each = { for vm in local.vm : vm.ip => vm }
+  for_each = { for vm in local.vm : vm.index => vm }
   name = each.value.vm_prefix
   resource_pool_id = data.vsphere_resource_pool.pool[each.value.index].id
   #resource_pool_id = data.vsphere_resource_pool.pool.id
