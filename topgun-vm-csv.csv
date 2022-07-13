@@ -1,0 +1,4 @@
+﻿vm_memory,ipv4_gateway,vm_folder,vm_cpu,resource_pool,ipv4_netmask,template_name,dns_server_list,network_name,datastore_name,datacenter,vm_domain,ip,vm_prefix
+2048,10.70.136.1,IST-Demo,2,IST-Demo,24,centos7min,10.70.136.9,MGMT-Net_136.x,NAS,DC1,IST-Demo,100.0.0.1,TOPGUN-1
+2048,10.70.136.1,IST-Demo,2,IST-Demo,24,centos7min,10.70.136.9,MGMT-Net_137.x,NAS,DC1,IST-Demo,100.0.0.2,TOPGUN-2
+2048,10.70.136.1,IST-Demo,2,IST-Demo,24,centos7min,10.70.136.9,MGMT-Net_138.x,NAS,DC1,IST-Demo,100.0.0.3,TOPGUN-3
