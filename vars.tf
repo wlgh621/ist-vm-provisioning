@@ -10,4 +10,8 @@ variable "vsphere_password" {
   type = string
   description = "The password for vsphere"
 }
-
+variable "vm_folder" {
+  type = string
+  default = "IST-Demo"
+  description = "Username for vsphere"
+}
