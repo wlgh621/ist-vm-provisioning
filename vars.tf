@@ -15,3 +15,6 @@ variable "vm_folder" {
   default = "IST-Demo"
   description = "Username for vsphere"
 }
+variable "default_tags" {
+  default = ""
+}
