@@ -59,8 +59,8 @@ resource "vsphere_virtual_machine" "vm_deploy" {
   #resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore[each.value.index].id
   #datastore_id     = data.vsphere_datastore.datastore.id
-  folder           =  vsphere_folder.vm_folder[each.value.index].path
-  #folder           = vsphere_folder.vm_folder.path
+  #folder           =  vsphere_folder.vm_folder[each.value.index].path
+  folder           = vsphere_folder.vm_folder.path
 
   num_cpus = each.value.vm_cpu
   memory   = each.value.memory
