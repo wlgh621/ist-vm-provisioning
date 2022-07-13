@@ -37,8 +37,8 @@ data "vsphere_virtual_machine" "template" {
 }
 
 resource "random_string" "folder_name_prefix" {
-  length    = 5
-  min_lower = 5
+  length    = 6
+  min_lower = 6
   special   = false
   lower     = true
 
