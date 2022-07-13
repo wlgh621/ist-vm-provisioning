@@ -45,16 +45,13 @@ resource "vsphere_folder" "vm_folder" {
 resource "vsphere_virtual_machine" "vm_deploy" {
   for_each = { for vm in local.vm : vm.ip => vm }
   name = each.value.vm_prefix
-  #name             = "${local.vm[count.index].vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
 
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
   folder           = vsphere_folder.vm_folder.path
 
   num_cpus = each.value.vm_cpu
-  #num_cpus = var.vm_cpu
-  #memory   = each.value.vm_memory
-  #memory   = var.vm_memory
+  memory   = each.value.memory
   guest_id = data.vsphere_virtual_machine.template.guest_id
 
   scsi_type = data.vsphere_virtual_machine.template.scsi_type
@@ -76,17 +73,14 @@ resource "vsphere_virtual_machine" "vm_deploy" {
     customize {
       linux_options {
         host_name  = each.value.vm_prefix
-        #host_name = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
-        domain    = var.vm_domain
+        domain    =  each.value.vm_domain
       }
       network_interface {
         ipv4_address = each.value.ip
-        #ipv4_address = local.vm[count.index].IP
-        #ipv4_address = lookup(var.master_ips, count.index)
-        ipv4_netmask = var.ipv4_netmask
+        ipv4_netmask = each.value.ipv4_netmask
       }
-      ipv4_gateway    = var.ipv4_gateway
-      dns_server_list = [var.dns_server_list]
+      ipv4_gateway    =  each.value.ipv4_gateway
+      dns_server_list = [each.value.dns_server_list]
       
     }
   }
