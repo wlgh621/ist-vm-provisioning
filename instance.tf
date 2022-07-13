@@ -75,7 +75,8 @@ resource "vsphere_virtual_machine" "vm_deploy" {
     template_uuid = data.vsphere_virtual_machine.template.id
     customize {
       linux_options {
-        host_name = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
+        host_name  = each.value.vm_prefix
+        #host_name = "${var.vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
         domain    = var.vm_domain
       }
       network_interface {
