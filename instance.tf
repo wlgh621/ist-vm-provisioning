@@ -1,5 +1,5 @@
 locals {
-  vm = csvdecode(file("./csv/topgun-vm-csv.csv"))
+  vm = csvdecode(file("topgun-vm-csv.csv"))
 }
 
 data "vsphere_datacenter" "dc" {
@@ -43,7 +43,7 @@ resource "vsphere_folder" "vm_folder" {
 
 #Lets see something cool with Cisco Intersight & TFCB
 resource "vsphere_virtual_machine" "vm_deploy" {
-  for_each = { for inst in local.vm : inst.vm_memory => inst }
+  for_each = { for vm in local.vm : vm.vm_memory => vm }
   name = each.value.vm_prefix
   #name             = "${local.vm[count.index].vm_prefix}-${random_string.folder_name_prefix.id}-${count.index + 1}"
 
