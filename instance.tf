@@ -56,9 +56,10 @@ resource "vsphere_folder" "vm_folder" {
 resource "vsphere_virtual_machine" "vm_deploy" {
   for_each = { for vm in local.vm : vm.ip => vm }
   name = each.value.vm_prefix
-
-  resource_pool_id = data.vsphere_resource_pool.pool.id
-  datastore_id     = data.vsphere_datastore.datastore.id
+  resource_pool_id = data.vsphere_resource_pool.pool[each.value.index].id
+  #resource_pool_id = data.vsphere_resource_pool.pool.id
+  datastore_id     = data.vsphere_datastore.datastore[each.value.index].id
+  #datastore_id     = data.vsphere_datastore.datastore.id
   folder           = vsphere_folder.vm_folder.path
 
   num_cpus = each.value.vm_cpu
