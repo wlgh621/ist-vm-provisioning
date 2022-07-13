@@ -3,7 +3,9 @@ locals {
 }
 
 data "vsphere_datacenter" "dc" {
-  name = var.datacenter
+  count = length(local.vm)
+  name = local.vm[count.index].datacenter
+  #name = var.datacenter
 }
 
 data "vsphere_datastore" "datastore" {
