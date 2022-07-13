@@ -52,8 +52,8 @@ resource "vsphere_virtual_machine" "vm_deploy" {
   folder           = vsphere_folder.vm_folder.path
 
   num_cpus = each.value.vm_cpu
-  #num_cpus = var.vm_cpu
-  memory   = each.value.vm_memory
+  num_cpus = var.vm_cpu
+  #memory   = each.value.vm_memory
   #memory   = var.vm_memory
   guest_id = data.vsphere_virtual_machine.template.guest_id
 
