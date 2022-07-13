@@ -46,10 +46,9 @@ resource "random_string" "folder_name_prefix" {
 
 
 resource "vsphere_folder" "vm_folder" {
-  count = length(local.vm)
-  path          =  "${local.vm[count.index].vm_folder}-${random_string.folder_name_prefix.id}"
+  path          =  "${var.vm_folder}-${random_string.folder_name_prefix.id}"
   type          = "vm"
-  datacenter_id = data.vsphere_datacenter.dc[count.index].id
+  datacenter_id = data.vsphere_datacenter.dc.id
 }
 
 #Lets see something cool with Cisco Intersight & TFCB
