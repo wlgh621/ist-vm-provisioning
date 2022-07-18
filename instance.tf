@@ -1,3 +1,5 @@
+#edited by jaheo@cisco.com for multi-vm provisioning using csv and excels
+
 locals {
   vm = csvdecode(file("topgun-vm-csv.csv"))
 }
